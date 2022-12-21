@@ -114,7 +114,7 @@ public class Lv1_Hamburger {
         for(int num : ingredient) {
             original.add(num);
 
-            if(original.size() >= 4 && 
+            if(original.size() >= 4 &&
             original.get(original.size()-4) == 1 &&
             original.get(original.size()-3) == 2 &&
             original.get(original.size()-2) == 3 &&
