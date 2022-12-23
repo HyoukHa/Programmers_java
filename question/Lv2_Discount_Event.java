@@ -20,10 +20,6 @@
  * 가능한 날이 없으면 0을 return 합니다.
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * 제한사항
  * 1 ≤ want의 길이 = number의 길이 ≤ 10
@@ -68,7 +64,6 @@ class Solution {
         int answer = 0;
         // 10일간의 할인 목록을 담을 배열 arr 생성 - 이때 길이는 want 와 같음
         int[] arr = new int[want.length];
-
 
         for(int i = 0 ; i < discount.length - 9 ; i++) {
             for(int j = i ; j < i+10 ; j++) {
