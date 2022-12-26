@@ -33,7 +33,7 @@
 public class Lv2_Discount_Event {
     public static void main(String[] args) {
         // Create Instance
-        Solution solution = new Solution();
+//        Solution solution = new Solution();
 
         // Test Case 1
         String[] want = {"banana", "apple", "rice", "pork", "pot"};
@@ -46,21 +46,10 @@ public class Lv2_Discount_Event {
 //        String[] discount = {"banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana"};
 
         // Result
-        System.out.println(solution.solution(want, number, discount));
+//        System.out.println(solution.solution(want, number, discount));
+        System.out.println(solution(want, number, discount));
     }
-}
-
-// 시도 1(성공) 아이디어 :
-// 원하는 할인을 받을 수 있는 날짜를 return 해주어야 하므로,
-// want 와 같은 길이의 배열 arr 생성
-// 총 10일 이므로 할인날짜 안에서 시작날짜를 정해줄 for 문 작성
-// 10일 안에서 원하는 할인상품이 있는지 체크하기위해 시작일 + 9번째 날까지 변화를 감지할 for 문 작성
-// want 에 있는 목록이 있는지 확인하여 arr 에 want 와 같은 인덱스 자리에 1추가
-// 각 항목이 number 보다 큰지 비교하여 클 경우 answer 에 1추가
-// 그리고 새로운 가입일에 대한 체크를 위해 arr 을 초기화해준다
-
-class Solution {
-    public int solution(String[] want, int[] number, String[] discount) {
+    public static int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
         // 10일간의 할인 목록을 담을 배열 arr 생성 - 이때 길이는 want 와 같음
         int[] arr = new int[want.length];
@@ -86,3 +75,40 @@ class Solution {
         return answer;
     }
 }
+
+// 시도 1(성공) 아이디어 :
+// 원하는 할인을 받을 수 있는 날짜를 return 해주어야 하므로,
+// want 와 같은 길이의 배열 arr 생성
+// 총 10일 이므로 할인날짜 안에서 시작날짜를 정해줄 for 문 작성
+// 10일 안에서 원하는 할인상품이 있는지 체크하기위해 시작일 + 9번째 날까지 변화를 감지할 for 문 작성
+// want 에 있는 목록이 있는지 확인하여 arr 에 want 와 같은 인덱스 자리에 1추가
+// 각 항목이 number 보다 큰지 비교하여 클 경우 answer 에 1추가
+// 그리고 새로운 가입일에 대한 체크를 위해 arr 을 초기화해준다
+
+//class Solution {
+//    public int solution(String[] want, int[] number, String[] discount) {
+//        int answer = 0;
+//        // 10일간의 할인 목록을 담을 배열 arr 생성 - 이때 길이는 want 와 같음
+//        int[] arr = new int[want.length];
+//
+//        for(int i = 0 ; i < discount.length - 9 ; i++) {
+//            for(int j = i ; j < i+10 ; j++) {
+//                for(int k = 0 ; k < want.length ; k++) {
+//                    if(want[k].equals(discount[j])) {
+//                        arr[k]++;
+//                    }
+//                }
+//            }
+//            for(int j = 0 ; j < arr.length ; j++) {
+//                if(j == arr.length-1 && number[j] <= arr[j]) {
+//                    answer++;
+//                }else if(number[j] > arr[j]) {
+//                    break;
+//                }
+//            }
+//            arr = new int[want.length];
+//        }
+//
+//        return answer;
+//    }
+//}
