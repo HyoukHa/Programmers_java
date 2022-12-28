@@ -25,8 +25,6 @@
  * 범희가 이 게임에서 얻을 수 있는 최고 점수를 구해서 return 하도록 solution 함수를 완성해주세요.
  */
 
-import java.util.*;
-
 /**
  * 제한사항
  * 2 ≤ cards의 길이 ≤ 100
@@ -35,13 +33,44 @@ import java.util.*;
  * cards[i]는 i + 1번 상자에 담긴 카드에 적힌 숫자를 의미합니다.
  */
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class Lv2_Playing_Alone {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+//        Solution solution = new Solution();
 
         int[] cards = {8, 6, 3, 7, 2, 5, 1, 4};
 
-        System.out.println(solution.solution(cards));
+        System.out.println(solution(cards));
+    }
+
+    public static int solution(int[] cards) {
+        int answer = 0;
+
+        int n = cards.length;
+        boolean[] isOpened = new boolean[n];
+        List<Integer> groups = new ArrayList<>();
+
+        for(int i = 0 ; i < n ; i++) {
+            int now = i;
+            int cnt = 0;
+            while(!isOpened[now]) {
+                isOpened[now] = true;
+                cnt++;
+                now = cards[now] - 1;
+            }
+
+            groups.add(cnt);
+        }
+
+        Collections.sort(groups, Collections.reverseOrder());
+
+        if(groups.size() != 1) {
+            answer = groups.get(0) * groups.get(1);
+        }
+
+        return answer;
     }
 }
 
@@ -49,8 +78,8 @@ public class Lv2_Playing_Alone {
 //    public int solution(int[] cards) {
 //        int answer = 0;
 //
-//        List<Integer> origin = Arrays.stream(cards).boxed().toList();
-////        List<Integer> origin = Arrays.stream(cards).boxed().collect(Collectors.toList());
+////        List<Integer> origin = Arrays.stream(cards).boxed().toList();
+//        List<Integer> origin = Arrays.stream(cards).boxed().collect(Collectors.toList());
 //
 //        // 1번 상자그룹을 담을 리스트 arr1
 //        List<Integer> arr1 = new ArrayList<>();
@@ -102,59 +131,33 @@ public class Lv2_Playing_Alone {
 // 문제를 잘 읽어보면 결국 이미 열려있는 상자가 나올 때 까지 반복하므로, 하나의 그룹으로 묶이면 어떤 상자를 먼저 골라도 같은 결과가 나온다.
 // 이러한 관점에 초점을 맞춰보게되면, 한번 열린 상자는 다시 확인 할 필요가 없다.
 // 그러므로 boolean 배열을 통해 열렸는지 확인하고, 각 그룹을 배열에 담아 정렬 한 후, 가장 큰 2개의 값을 추출하면 된다.
-class Solution {
-    public int solution(int[] cards) {
-        int answer = 0;
 
-        int n = cards.length;
-        boolean[] isOpened = new boolean[n];
-        List<Integer> groups = new ArrayList<>();
-
-        for(int i = 0 ; i < n ; i++) {
-            int now = i;
-            int cnt = 0;
-            while(!isOpened[now]) {
-                isOpened[now] = true;
-                cnt++;
-                now = cards[now] - 1;
-            }
-
-            groups.add(cnt);
-        }
-
-        Collections.sort(groups, Collections.reverseOrder());
-
-        if(groups.size() != 1) {
-            answer = groups.get(0) * groups.get(1);
-        }
-
-        return answer;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//class Solution {
+//    public int solution(int[] cards) {
+//        int answer = 0;
+//
+//        int n = cards.length;
+//        boolean[] isOpened = new boolean[n];
+//        List<Integer> groups = new ArrayList<>();
+//
+//        for(int i = 0 ; i < n ; i++) {
+//            int now = i;
+//            int cnt = 0;
+//            while(!isOpened[now]) {
+//                isOpened[now] = true;
+//                cnt++;
+//                now = cards[now] - 1;
+//            }
+//
+//            groups.add(cnt);
+//        }
+//
+//        Collections.sort(groups, Collections.reverseOrder());
+//
+//        if(groups.size() != 1) {
+//            answer = groups.get(0) * groups.get(1);
+//        }
+//
+//        return answer;
+//    }
+//}
