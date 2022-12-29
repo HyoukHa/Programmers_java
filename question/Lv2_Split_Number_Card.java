@@ -44,121 +44,167 @@ public class Lv2_Split_Number_Card {
         int[] arrayB = {18, 30, 102};
 
 //        long before = System.nanoTime();
-//        System.out.println(solution.solution(arrayA, arrayB));
+        System.out.println(solution.solution(arrayA, arrayB));
 //        long after = System.nanoTime();
 //        long diff = after - before;
 //        System.out.println(diff);
-        System.out.println(false ? 1 : 2);
+//        System.out.println(false ? 1 : 2);
     }
 }
 
+//class Solution {
+//    public int solution(int[] arrayA, int[] arrayB) {
+//        // GCD 를 구하기 위해 두 카드그룹을 정렬해준다.
+////        Arrays.sort(arrayA);
+////        Arrays.sort(arrayB);
+//
+//        for(int a : arrayA) {
+//            System.out.println(a);
+//        }
+//
+//        int answer = 0, gcdA = arrayA[0], gcdB = arrayB[0];
+//
+//        if(arrayA.length == 1) {
+//            gcdA = arrayA[0];
+//        }else {
+//            for(int i = 0 ; i < arrayA.length ; i++) {
+//                gcdA = getGCD(gcdA, arrayA[i]);
+//            }
+//        }
+//
+//        if(arrayB.length == 1) {
+//            gcdB = arrayB[0];
+//        }else {
+//            for(int i = 0 ; i < arrayB.length ; i++) {
+//                gcdB = getGCD(gcdB, arrayB[i]);
+//            }
+//        }
+//
+//        List<Integer> A = new ArrayList<>(), B = new ArrayList<>();
+//
+//        for(int i = 1 ; i < Math.sqrt(gcdA) ; i++) {
+//            if(gcdA % i == 0) {
+//                if(i * i == gcdA) {
+//                    A.add(i);
+//                }else {
+//                    A.add(i);
+//                    A.add(gcdA / i);
+//                }
+//            }
+//        }
+//
+//        A.remove(Integer.valueOf(1));
+//        Collections.sort(A, Collections.reverseOrder());
+//
+//        for(int step : A) {
+//            boolean progress = true;
+//            for(int each : arrayB) {
+//                if(progress) {
+//                    if(each % step == 0) {
+//                        progress = false;
+//                        break;
+//                    }
+//                }
+//            }
+//            if(progress) {
+//                answer = step;
+//                break;
+//            }
+//        }
+//
+//        for(int i = 1 ; i < Math.sqrt(gcdB) ; i++) {
+//            if(gcdB % i == 0) {
+//                if(i * i == gcdB) {
+//                    B.add(i);
+//                }else {
+//                    B.add(i);
+//                    B.add(gcdB / i);
+//                }
+//            }
+//        }
+//
+//        B.remove(Integer.valueOf(1));
+//        Collections.sort(B, Collections.reverseOrder());
+//
+//        for(int step : B) {
+//            boolean progress = true;
+//            for(int each : arrayA) {
+//                if(progress) {
+//                    if(each % step == 0) {
+//                        progress = false;
+//                        break;
+//                    }
+//                }
+//            }
+//            if(progress) {
+//                if(answer < step) {
+//                    answer = step;
+//                }
+//                break;
+//            }
+//        }
+//        System.out.println("gcdA : " + gcdA);
+//        System.out.println("gcdB : " + gcdB);
+//
+//
+//        return answer;
+//    }
+//
+//    public int getGCD(int num1, int num2) {
+//        if(num1 % num2 == 0) {
+//            return num2;
+//        }
+//        return getGCD(num2, num1 % num2);
+//    }
+//}
+
 class Solution {
     public int solution(int[] arrayA, int[] arrayB) {
-        Arrays.sort(arrayA);
-        Arrays.sort(arrayB);
-        int answer = 0, gcdA = arrayA[0], gcdB = arrayB[0];
+        int answer = 0;
 
-        if(arrayA.length == 1) {
-            gcdA = arrayA[0];
-        }else {
-            for(int i = 0 ; i < arrayA.length ; i++) {
-                gcdA = getGCD(gcdA, arrayA[i]);
-            }
-        }
+        int aMin = getMin(arrayA);
+        int aGcd = getArraysGcd(arrayA, aMin);
 
-        if(arrayB.length == 1) {
-            gcdB = arrayB[0];
-        }else {
-            for(int i = 0 ; i < arrayB.length ; i++) {
-                gcdB = getGCD(gcdB, arrayB[i]);
-            }
-        }
+        int bMin = getMin(arrayB);
+        int bGcd = getArraysGcd(arrayB, bMin);
 
-        List<Integer> A = new ArrayList<>(), B = new ArrayList<>();
-
-        for(int i = 1 ; i < Math.sqrt(gcdA) ; i++) {
-            if(gcdA % i == 0) {
-                if(i * i == gcdA) {
-                    A.add(i);
-                }else {
-                    A.add(i);
-                    A.add(gcdA / i);
-                }
-            }
-        }
-
-        A.remove(Integer.valueOf(1));
-        Collections.sort(A, Collections.reverseOrder());
-
-        for(int step : A) {
-            boolean progress = true;
-            for(int each : arrayB) {
-                if(progress) {
-                    if(each % step == 0) {
-                        progress = false;
-                        break;
-                    }
-                }
-            }
-            if(progress) {
-                answer = step;
-                break;
-            }
-        }
-
-        for(int i = 1 ; i < Math.sqrt(gcdB) ; i++) {
-            if(gcdB % i == 0) {
-                if(i * i == gcdB) {
-                    B.add(i);
-                }else {
-                    B.add(i);
-                    B.add(gcdB / i);
-                }
-            }
-        }
-
-        B.remove(Integer.valueOf(1));
-        Collections.sort(B, Collections.reverseOrder());
-
-        for(int step : B) {
-            boolean progress = true;
-            for(int each : arrayA) {
-                if(progress) {
-                    if(each % step == 0) {
-                        progress = false;
-                        break;
-                    }
-                }
-            }
-            if(progress) {
-                if(answer < step) {
-                    answer = step;
-                }
-                break;
-            }
-        }
-        System.out.println("gcdA : " + gcdA);
-        System.out.println("gcdB : " + gcdB);
-
+        answer = getAnswer(aGcd, arrayB, answer);
+        answer = getAnswer(bGcd, arrayA, answer);
 
         return answer;
     }
 
-    public int getGCD(int num1, int num2) {
-        if(num1 > num2) {
-            if(num1 % num2 == 0) {
-                return num2;
+    private static int getAnswer(int gcd, int[] array, int answer) {
+        for (int num : array) {
+            if (num % gcd == 0) {
+                return Math.max(answer, 0);
             }
-            return getGCD(num2, num1 % num2);
-        }else if(num1 < num2){
-            if(num2 % num1 == 0) {
-                return num1;
-            }
-            return getGCD(num1, num2 % num1);
-        }else {
-            return num1;
         }
+        return Math.max(answer, gcd);
     }
 
+    private static int getMin(int[] array) {
+        return Arrays.stream(array)
+                .reduce(Math::min)
+                .getAsInt();
+    }
 
+    private static int getArraysGcd(int[] array, int min) {
+        int gcd = 1;
+        for (int i = 2; i <= min; i++) {
+            if (isGcd(array, i)) {
+                gcd = i;
+            }
+        }
+        return gcd;
+    }
+
+    private static boolean isGcd(int[] array, int i) {
+        for (int num : array) {
+            if (num % i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
