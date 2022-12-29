@@ -1,3 +1,4 @@
+// tistory
 /**
  * 문제 설명
  * 철수와 영희는 선생님으로부터 숫자가 하나씩 적힌 카드들을 절반씩 나눠서 가진 후,
@@ -25,14 +26,11 @@
  * arrayA와 arrayB에는 중복된 원소가 있을 수 있습니다.
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lv2_Split_Number_Card {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+//        Solution solution = new Solution();
 
 //        int[] arrayA = {10, 17};
 //        int[] arrayB = {5, 20};
@@ -44,23 +42,84 @@ public class Lv2_Split_Number_Card {
         int[] arrayB = {18, 30, 102};
 
 //        long before = System.nanoTime();
-        System.out.println(solution.solution(arrayA, arrayB));
+//        System.out.println(solution.solution(arrayA, arrayB));
 //        long after = System.nanoTime();
 //        long diff = after - before;
 //        System.out.println(diff);
 //        System.out.println(false ? 1 : 2);
+
+        String a = "abcde";
+        String answer = "";
+        int n = 3;
+
+        for(int i = 0 ; i < a.length() ; i++) {
+            for(int j = 0 ; j < n ; j++) {
+                answer += Character.toString(a.charAt(i));
+            }
+        }
+        System.out.println(answer);
+    }
+
+    public int solution(int[] arrayA, int[] arrayB) {
+        int answer = 0;
+
+        int aMin = getMin(arrayA);
+        int aGcd = getArraysGcd(arrayA, aMin);
+
+        int bMin = getMin(arrayB);
+        int bGcd = getArraysGcd(arrayB, bMin);
+
+        answer = getAnswer(aGcd, arrayB, answer);
+        answer = getAnswer(bGcd, arrayA, answer);
+
+        return answer;
+    }
+
+    private static int getAnswer(int gcd, int[] array, int answer) {
+        for (int num : array) {
+            if (num % gcd == 0) {
+                return Math.max(answer, 0);
+            }
+        }
+        return Math.max(answer, gcd);
+    }
+
+    private static int getMin(int[] array) {
+        return Arrays.stream(array)
+                .reduce(Math::min)
+                .getAsInt();
+    }
+
+    private static int getArraysGcd(int[] array, int min) {
+        int gcd = 1;
+        for (int i = 2; i <= min; i++) {
+            if (isGcd(array, i)) {
+                gcd = i;
+            }
+        }
+        return gcd;
+    }
+
+    private static boolean isGcd(int[] array, int i) {
+        for (int num : array) {
+            if (num % i != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
 //class Solution {
 //    public int solution(int[] arrayA, int[] arrayB) {
-//        // GCD 를 구하기 위해 두 카드그룹을 정렬해준다.
-////        Arrays.sort(arrayA);
-////        Arrays.sort(arrayB);
-//
 //        for(int a : arrayA) {
 //            System.out.println(a);
 //        }
+//
+//        int[] abc = {1, 2};
+//
+//        ArrayList<Integer> list = new ArrayList<>();
+//        list.toArray();
 //
 //        int answer = 0, gcdA = arrayA[0], gcdB = arrayB[0];
 //
@@ -158,53 +217,53 @@ public class Lv2_Split_Number_Card {
 //    }
 //}
 
-class Solution {
-    public int solution(int[] arrayA, int[] arrayB) {
-        int answer = 0;
-
-        int aMin = getMin(arrayA);
-        int aGcd = getArraysGcd(arrayA, aMin);
-
-        int bMin = getMin(arrayB);
-        int bGcd = getArraysGcd(arrayB, bMin);
-
-        answer = getAnswer(aGcd, arrayB, answer);
-        answer = getAnswer(bGcd, arrayA, answer);
-
-        return answer;
-    }
-
-    private static int getAnswer(int gcd, int[] array, int answer) {
-        for (int num : array) {
-            if (num % gcd == 0) {
-                return Math.max(answer, 0);
-            }
-        }
-        return Math.max(answer, gcd);
-    }
-
-    private static int getMin(int[] array) {
-        return Arrays.stream(array)
-                .reduce(Math::min)
-                .getAsInt();
-    }
-
-    private static int getArraysGcd(int[] array, int min) {
-        int gcd = 1;
-        for (int i = 2; i <= min; i++) {
-            if (isGcd(array, i)) {
-                gcd = i;
-            }
-        }
-        return gcd;
-    }
-
-    private static boolean isGcd(int[] array, int i) {
-        for (int num : array) {
-            if (num % i != 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-}
+//class Solution {
+//    public int solution(int[] arrayA, int[] arrayB) {
+//        int answer = 0;
+//
+//        int aMin = getMin(arrayA);
+//        int aGcd = getArraysGcd(arrayA, aMin);
+//
+//        int bMin = getMin(arrayB);
+//        int bGcd = getArraysGcd(arrayB, bMin);
+//
+//        answer = getAnswer(aGcd, arrayB, answer);
+//        answer = getAnswer(bGcd, arrayA, answer);
+//
+//        return answer;
+//    }
+//
+//    private static int getAnswer(int gcd, int[] array, int answer) {
+//        for (int num : array) {
+//            if (num % gcd == 0) {
+//                return Math.max(answer, 0);
+//            }
+//        }
+//        return Math.max(answer, gcd);
+//    }
+//
+//    private static int getMin(int[] array) {
+//        return Arrays.stream(array)
+//                .reduce(Math::min)
+//                .getAsInt();
+//    }
+//
+//    private static int getArraysGcd(int[] array, int min) {
+//        int gcd = 1;
+//        for (int i = 2; i <= min; i++) {
+//            if (isGcd(array, i)) {
+//                gcd = i;
+//            }
+//        }
+//        return gcd;
+//    }
+//
+//    private static boolean isGcd(int[] array, int i) {
+//        for (int num : array) {
+//            if (num % i != 0) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//}
