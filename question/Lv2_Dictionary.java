@@ -28,6 +28,8 @@ public class Lv2_Dictionary {
     }
 }
 
+// 시도 1(성공)
+// 장장 1시간의 고민끝에 패턴을 찾아 해결하였다.....
 class Solution {
     public int solution(String word) {
         int answer = 0;
