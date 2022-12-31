@@ -18,20 +18,16 @@ import java.util.ArrayList;
 
 public class Lv2_Dictionary {
     public static void main(String[] args) {
-        Solution solution = new Solution();
+//        Solution solution = new Solution();
 
         String word = "AAAAE"; // 6
 //        String word = "AAAE"; // 10
 //        String word = "I"; // 1563
 //        String word = "EIO";
-        System.out.println(solution.solution(word));
+        System.out.println(solution(word));
     }
-}
 
-// 시도 1(성공)
-// 장장 1시간의 고민끝에 패턴을 찾아 해결하였다.....
-class Solution {
-    public int solution(String word) {
+    public static int solution(String word) {
         int answer = 0;
         ArrayList<String> spell = new ArrayList<>();
         int[] digit = {781, 156, 31, 6, 1};
@@ -49,3 +45,25 @@ class Solution {
         return answer;
     }
 }
+
+// 시도 1(성공)
+// 장장 1시간의 고민끝에 패턴을 찾아 해결하였다.....
+//class Solution {
+//    public int solution(String word) {
+//        int answer = 0;
+//        ArrayList<String> spell = new ArrayList<>();
+//        int[] digit = {781, 156, 31, 6, 1};
+//
+//        spell.add("A");
+//        spell.add("E");
+//        spell.add("I");
+//        spell.add("O");
+//        spell.add("U");
+//
+//        for(int i = 0 ; i < word.length() ; i++) {
+//            answer += digit[i] * spell.indexOf(Character.toString(word.charAt(i))) + 1;
+//        }
+//
+//        return answer;
+//    }
+//}
