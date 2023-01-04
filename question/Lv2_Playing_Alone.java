@@ -1,3 +1,5 @@
+// tistory
+
 /**
  * 문제 설명
  * 혼자서도 잘 노는 범희는 어느 날 방구석에 있는 숫자 카드 더미를 보더니 혼자 할 수 있는 재미있는 게임을 생각해냈습니다.
@@ -34,7 +36,6 @@
  */
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lv2_Playing_Alone {
     public static void main(String[] args) {
