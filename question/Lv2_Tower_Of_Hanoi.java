@@ -20,12 +20,50 @@ import java.util.ArrayList;
  */
 
 public class Lv2_Tower_Of_Hanoi {
+    static int index = 0;
     public static void main(String[] args) {
-        Solution solution = new Solution();
+//        Solution solution = new Solution();
 
-        System.out.println(solution.solution(2));
+//        System.out.println(solution.solution(2));
+        System.out.println(solution(5));
     }
 
+    public static int[][] solution(int n) {
+        int[][] answer = new int[(int)Math.pow(2, n) - 1][2];
+
+        hanoi(n, 1, 2, 3, answer);
+
+        System.out.println("[");
+        for(int j = 0 ; j < answer.length ; j++) {
+            int[] eachArr = answer[j];
+            System.out.print("[");
+            for(int i = 0 ; i < eachArr.length ; i++) {
+                if(i == eachArr.length-1) {
+                    System.out.print(eachArr[i]);
+                }else {
+                    System.out.print(eachArr[i] + ", ");
+                }
+            }
+            if(j != answer.length - 1) {
+                System.out.print("], ");
+            }else {
+                System.out.println("]");
+            }
+        }
+        System.out.println("]");
+
+        return new int[2][2];
+    }
+
+    public static void hanoi(int n, int startPoint, int wayPoint, int endPoint, int[][] answer) {
+        if(n == 1) {
+            answer[index++] = new int[]{startPoint, endPoint};
+        }else {
+            hanoi(n-1, startPoint, endPoint, wayPoint, answer);
+            answer[index++] = new int[]{startPoint, endPoint};
+            hanoi(n-1, wayPoint, startPoint, endPoint, answer);
+        }
+    }
 
 }
 
@@ -54,42 +92,42 @@ public class Lv2_Tower_Of_Hanoi {
 //    }
 //}
 
-class Solution{
-    int index = 0;
-    public int[][] solution(int n) {
-        int[][] answer = new int[(int)Math.pow(2, n) - 1][2];
-
-        hanoi(n, 1, 2, 3, answer);
-
-        System.out.println("[");
-        for(int j = 0 ; j < answer.length ; j++) {
-            int[] eachArr = answer[j];
-            System.out.print("[");
-            for(int i = 0 ; i < eachArr.length ; i++) {
-                if(i == eachArr.length-1) {
-                    System.out.print(eachArr[i]);
-                }else {
-                    System.out.print(eachArr[i] + ", ");
-                }
-            }
-            if(j != answer.length - 1) {
-                System.out.print("], ");
-            }else {
-                System.out.println("]");
-            }
-        }
-        System.out.println("]");
-
-        return new int[2][2];
-    }
-
-    public void hanoi(int n, int startPoint, int wayPoint, int endPoint, int[][] answer) {
-        if(n == 1) {
-            answer[index++] = new int[]{startPoint, endPoint};
-        }else {
-            hanoi(n-1, startPoint, endPoint, wayPoint, answer);
-            answer[index++] = new int[]{startPoint, endPoint};
-            hanoi(n-1, wayPoint, startPoint, endPoint, answer);
-        }
-    }
-}
+//class Solution{
+//    int index = 0;
+//    public int[][] solution(int n) {
+//        int[][] answer = new int[(int)Math.pow(2, n) - 1][2];
+//
+//        hanoi(n, 1, 2, 3, answer);
+//
+//        System.out.println("[");
+//        for(int j = 0 ; j < answer.length ; j++) {
+//            int[] eachArr = answer[j];
+//            System.out.print("[");
+//            for(int i = 0 ; i < eachArr.length ; i++) {
+//                if(i == eachArr.length-1) {
+//                    System.out.print(eachArr[i]);
+//                }else {
+//                    System.out.print(eachArr[i] + ", ");
+//                }
+//            }
+//            if(j != answer.length - 1) {
+//                System.out.print("], ");
+//            }else {
+//                System.out.println("]");
+//            }
+//        }
+//        System.out.println("]");
+//
+//        return new int[2][2];
+//    }
+//
+//    public void hanoi(int n, int startPoint, int wayPoint, int endPoint, int[][] answer) {
+//        if(n == 1) {
+//            answer[index++] = new int[]{startPoint, endPoint};
+//        }else {
+//            hanoi(n-1, startPoint, endPoint, wayPoint, answer);
+//            answer[index++] = new int[]{startPoint, endPoint};
+//            hanoi(n-1, wayPoint, startPoint, endPoint, answer);
+//        }
+//    }
+//}
