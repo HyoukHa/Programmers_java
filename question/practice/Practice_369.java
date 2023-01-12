@@ -16,7 +16,7 @@ package practice;
 
 public class Practice_369 {
     public static void main(String[] args) {
-
+        System.out.println(solution(10));
     }
 
     public static int solution(int order) {
