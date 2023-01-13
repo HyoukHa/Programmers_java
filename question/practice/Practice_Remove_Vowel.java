@@ -1,4 +1,6 @@
-package practice;// 모음 제거
+package practice;
+
+// 모음 제거
 
 /**
  * 문제 설명

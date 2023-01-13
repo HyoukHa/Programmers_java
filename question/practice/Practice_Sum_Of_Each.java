@@ -1,4 +1,6 @@
-package practice;// 자리수 더하기
+package practice;
+
+// 자리수 더하기
 
 /**
  * 문제 설명
